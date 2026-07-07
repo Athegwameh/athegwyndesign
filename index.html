@@ -3321,7 +3321,7 @@
         <a href="#services">Services</a>
         <a href="#origin">Origin</a>
         <a href="#process">Process</a>
-        <a class="nav-cta" href="mailto:athegwyn@gmail.com?subject=Project%20Inquiry%20for%20Athegwyn&body=Hello%20Athegwyn%2C%0A%0AI%20would%20like%20to%20make%20an%20inquiry%20about%20a%20design%20project.%0A%0AName%3A%0ACompany%2FBrand%3A%0AProject%20type%3A%0ATimeline%3A%0ABudget%20range%3A%0AMessage%3A%0A%0A" target="_blank" rel="noopener">Start</a>
+        <a data-email-action="gmail-app" class="nav-cta" href="mailto:athegwyn@gmail.com?subject=Project%20Inquiry%20for%20Athegwyn&body=Hello%20Athegwyn%2C%0A%0AI%20would%20like%20to%20make%20an%20inquiry%20about%20a%20design%20project.%0A%0AName%3A%0ACompany%2FBrand%3A%0AProject%20type%3A%0ATimeline%3A%0ABudget%20range%3A%0AMessage%3A%0A%0A">Start</a>
       </div>
 
       <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">
@@ -3833,7 +3833,7 @@
         </p>
         <div class="actions" style="justify-content:center;">
           <a data-email-action="gmail-app" class="btn btn-primary" href="mailto:athegwyn@gmail.com?subject=Project%20Inquiry%20for%20Athegwyn&body=Hello%20Athegwyn%2C%0A%0AI%20would%20like%20to%20make%20an%20inquiry%20about%20a%20design%20project.%0A%0AName%3A%0ACompany%2FBrand%3A%0AProject%20type%3A%0ATimeline%3A%0ABudget%20range%3A%0AMessage%3A%0A%0A"><span>Start an Identity Project</span></a>
-          <a class="btn btn-secondary" href="mailto:athegwyn@gmail.com?subject=Project%20Inquiry%20for%20Athegwyn&body=Hello%20Athegwyn%2C%0A%0AI%20would%20like%20to%20make%20an%20inquiry%20about%20a%20design%20project.%0A%0AName%3A%0ACompany%2FBrand%3A%0AProject%20type%3A%0ATimeline%3A%0ABudget%20range%3A%0AMessage%3A%0A%0A" target="_blank" rel="noopener"><span>Send an Email</span></a>
+          <a data-email-action="gmail-app" class="btn btn-secondary" href="mailto:athegwyn@gmail.com?subject=Project%20Inquiry%20for%20Athegwyn&body=Hello%20Athegwyn%2C%0A%0AI%20would%20like%20to%20make%20an%20inquiry%20about%20a%20design%20project.%0A%0AName%3A%0ACompany%2FBrand%3A%0AProject%20type%3A%0ATimeline%3A%0ABudget%20range%3A%0AMessage%3A%0A%0A"><span>Send an Email</span></a>
         </div>
       </div>
     </section>
@@ -3875,21 +3875,13 @@
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const finePointer = window.matchMedia('(pointer: fine)').matches;
 
+
   const emailAddress = decodeURIComponent('athegwyn%40gmail.com');
   const emailSubject = decodeURIComponent('Project%20Inquiry%20for%20Athegwyn');
   const emailBody = decodeURIComponent('Hello%20Athegwyn%2C%0A%0AI%20would%20like%20to%20make%20an%20inquiry%20about%20a%20design%20project.%0A%0AName%3A%0ACompany/Brand%3A%0AProject%20type%3A%0ATimeline%3A%0ABudget%20range%3A%0AMessage%3A%0A%0A');
   const mailtoUrl = "mailto:athegwyn@gmail.com?subject=Project%20Inquiry%20for%20Athegwyn&body=Hello%20Athegwyn%2C%0A%0AI%20would%20like%20to%20make%20an%20inquiry%20about%20a%20design%20project.%0A%0AName%3A%0ACompany%2FBrand%3A%0AProject%20type%3A%0ATimeline%3A%0ABudget%20range%3A%0AMessage%3A%0A%0A";
 
-  const loader = document.getElementById('loader');
-  function hideLoader() {
-    if (!loader) return;
-    loader.classList.add('done');
-    loader.setAttribute('aria-hidden', 'true');
-  }
-  window.addEventListener('load', () => setTimeout(hideLoader, prefersReduced ? 50 : 850));
-  setTimeout(hideLoader, 3200);
-
-  function openEmailApp(event) {
+  function openAthegwynGmail(event) {
     const link = event.currentTarget;
     if (!link || link.dataset.emailAction !== 'gmail-app') return;
 
@@ -3928,6 +3920,7 @@
       return;
     }
 
+    // Desktop/other: use the user's configured mail app.
     link.setAttribute('href', mailtoUrl);
   }
 
@@ -3935,10 +3928,10 @@
     link.setAttribute('href', mailtoUrl);
     link.removeAttribute('target');
     link.removeAttribute('rel');
-    link.addEventListener('click', openEmailApp);
+    link.addEventListener('click', openAthegwynGmail);
   });
 
-  const cursor = document.getElementById('cursor');
+const cursor = document.getElementById('cursor');
   let cursorEnabled = false;
   let cx = 0, cy = 0, tx = 0, ty = 0;
 
